@@ -127,6 +127,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 
+//#region QuyenNc( khởi tạo các mảng hình ảnh )
 const solution = [
   { src: "cdn/aboduone/abozu1.png" },
   { src: "cdn/aboduone/abozu2.jpeg" },
@@ -157,6 +158,9 @@ const door = [
 const addon = [
     { src: "cdn/aboduone/house/add-on/add-on.png", price: 2000 }
 ]
+//#endregion
+
+//#region QuyenNc ( khởi tạo các biến dữ liệu )
 const renderType = ref([]);
 const totalPrice = ref(0);
 
@@ -172,6 +176,7 @@ const activeStairIndex = ref(null);
 const activeRoofIndex = ref(null);
 const activeDoorIndex = ref(null);
 const activeAddonIndex = ref(null);
+//#region
 
 const reset = () => {
     renderRoof.value = null;
@@ -181,16 +186,18 @@ const reset = () => {
     renderStair.value = null;
 }
 
+//#region QuyenNc ( khởi tạo hàm sự kiện slide )
 function nextSlide() {
     reset()
   currentSlide.value = (currentSlide.value + 1) % solution.length;
 }
-
 function prevSlide() {
     reset()
   currentSlide.value = (currentSlide.value - 1 + solution.length) % solution.length;
 }
+//#endregion
 
+//#region QuyenNc ( khởi tạo hàm render hình ảnh product )
 function renderWallImg(index) {
     renderWall.value = wall[index];
     activeWallIndex.value = index;
@@ -225,6 +232,8 @@ function getRenderObjects() {
         addon: renderAddon.value
     };
 }
+//#endregion
+// Khởi tao giá trị mặc định
 onMounted(() => {
     renderWall.value = { src: "cdn/aboduone/house/wall/lap-white.png", price: 7500 }
     activeWallIndex.value = 0;
@@ -236,7 +245,7 @@ onMounted(() => {
     activeDoorIndex.value = 0;
 })
 
-// Watch for changes in renderWall, renderStair, renderRoof, renderDoor, and renderAddon
+// Theo dõi sự thay đổi của renderWall, renderStair, renderRoof, renderDoor, và renderAddon
 watch([renderWall, renderStair, renderRoof, renderDoor, renderAddon], () => {
     const renderObjects = getRenderObjects();
     renderType.value = Object.values(renderObjects).filter(item => item !== null).map(item => item);
