@@ -179,11 +179,16 @@ const activeAddonIndex = ref(null);
 //#region
 
 const reset = () => {
-    renderRoof.value = null;
-    renderWall.value = null;
-    renderDoor.value = null;
+    renderWall.value = { src: "cdn/aboduone/house/wall/lap-white.png", price: 7500 }
+    activeWallIndex.value = 0;
+    renderStair.value = { src: "cdn/aboduone/house/Stair/stair.png", price: 8000 }
+    activeStairIndex.value = 0;
+    renderRoof.value = { src: "", price: 5700 }
+    activeRoofIndex.value = 0;
+    renderDoor.value = { src: "", price: 20000 }
+    activeDoorIndex.value = 0;
     renderAddon.value = null;
-    renderStair.value = null;
+    activeAddonIndex.value = null;
 }
 
 //#region QuyenNc ( khởi tạo hàm sự kiện slide )
@@ -219,8 +224,9 @@ function renderDoorImg(index) {
 }
 
 function renderAddonImg(index) {
-    renderAddon.value = addon[index];
-    activeAddonIndex.value = index;
+    const isActive = activeAddonIndex.value === index;
+    renderAddon.value = isActive ? null : addon[index];
+    activeAddonIndex.value = isActive ? null : index;
 }
 
 function getRenderObjects() {
