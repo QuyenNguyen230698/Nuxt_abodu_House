@@ -115,7 +115,7 @@
                     <div>${{ addon[0].price }}</div>
                 </button>
                 </div>
-                <div class="flex w-full p-5 gap-5 justify-between items-center fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
+                <div class="flex w-full p-5 gap-5 justify-between items-center pb-16 lg:pb-0 fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
                     <div class="w-full text-start">Total Price: ${{ totalPrice }}</div>
                     <div class="w-full text-end"><button @click="reset()" class="btn">Reset Custom</button></div>
                 </div>
