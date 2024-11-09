@@ -4,7 +4,7 @@
             <!-- render Imgage Product -->
             <div class="w-full col-span-6 lg:col-span-9 h-full lg:h-full flex justify-center items-center">
                 <div class="carousel w-full relative order-1 lg:order-2 h-full">
-                    <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item w-full max-h-screen" 
+                    <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item duration-500 ease-in-out translate-all w-full max-h-screen" 
                     :style="{ transform: `translateX(-${currentSlide * 100}%)` }" >
                     <NuxtImg :src="slide.src" loading="lazy" class="w-full h-full object-cover object-center" />
                     <div v-for="item in renderType" :key="item.src" class="absolute inset-0 flex items-center justify-center">
@@ -191,14 +191,25 @@ const reset = () => {
     renderAddon.value = null;
     activeAddonIndex.value = null;
 }
+const resetSlide = () => {
+    renderWall.value = null;
+    activeWallIndex.value = null;
+    renderStair.value = null;
+    activeStairIndex.value = null;
+    renderRoof.value = null;
+    activeRoofIndex.value = null;
+    renderDoor.value = null;
+    activeDoorIndex.value = null;
+    renderAddon.value = null;
+}
 
 //#region QuyenNc ( khởi tạo hàm sự kiện slide )
 function nextSlide() {
-    reset()
+    resetSlide()
   currentSlide.value = (currentSlide.value + 1) % solution.length;
 }
 function prevSlide() {
-    reset()
+    resetSlide()
   currentSlide.value = (currentSlide.value - 1 + solution.length) % solution.length;
 }
 //#endregion
