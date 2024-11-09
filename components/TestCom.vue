@@ -111,7 +111,7 @@
                 <button @click="renderAddonImg(0)"
                 class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeAddonIndex === 0 ? 'border-2 border-orange-900' : ''">
-                    <div>Gutters</div>
+                    <div class="flex items-center justify-center gap-1"><input type="checkbox" :checked="checkAddon" class="checkbox rounded-full" />Gutters</div>
                     <div>${{ addon[0].price }}</div>
                 </button>
                 </div>
@@ -163,6 +163,7 @@ const addon = [
 //#region QuyenNc ( khởi tạo các biến dữ liệu )
 const renderType = ref([]);
 const totalPrice = ref(0);
+const checkAddon = ref(false);
 
 const currentSlide = ref(0);
 const renderWall = ref(null);
@@ -227,6 +228,7 @@ function renderAddonImg(index) {
     const isActive = activeAddonIndex.value === index;
     renderAddon.value = isActive ? null : addon[index];
     activeAddonIndex.value = isActive ? null : index;
+    checkAddon.value = !isActive;
 }
 
 function getRenderObjects() {
