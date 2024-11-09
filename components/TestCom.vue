@@ -1,13 +1,14 @@
 <template>
     <div>
-        <div class="flex flex-row">
-            <div class="w-2/3">
-                <div class="carousel w-full relative overflow-hidden order-1 lg:order-2">
+        <div class="grid lg:grid-cols-12 w-full h-full max-h-screen overflow-hidden">
+            <!-- render Imgage Product -->
+            <div class="w-full col-span-6 lg:col-span-9 h-full lg:h-full flex justify-center items-center">
+                <div class="carousel w-full relative order-1 lg:order-2 h-full">
                     <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item w-full transition-transform duration-700" 
-                    :style="{ transform: `translateX(-${currentSlide * 100}%)` }" style="height: 100vh;">
-                    <NuxtImg :src="slide.src" loading="lazy" class="w-full" />
-                    <div v-for="item in renderPrice" :key="item.src" class="absolute inset-0 flex items-center justify-center">
-                        <NuxtImg :src="item.src" loading="lazy" :class="[item.zindex]" class="w-full h-full" style="height: 100vh;"/>
+                    :style="{ transform: `translateX(-${currentSlide * 100}%)` }" >
+                    <NuxtImg :src="slide.src" loading="lazy" class="w-full h-full object-cover" />
+                    <div v-for="item in renderType" :key="item.src" class="absolute inset-0 flex items-center justify-center">
+                        <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover"/>
                     </div>
                     </div>
                     <div class="absolute inset-y-1/2 left-5 flex items-center">
@@ -18,37 +19,106 @@
                     </div>
                 </div>
             </div>
-            <div class="w-1/3">
-                <h2>wall</h2>
-                <button @click="renderWallImg(0)">lap-white</button>
-                <br>
-                <button @click="renderWallImg(1)">lap-black</button>
-                <br>
-                <button @click="renderWallImg(2)">board-white</button>
-                <br>
-                <button @click="renderWallImg(3)">board-black</button>
-                <br>
-                <h2>stair</h2>
-                <button @click="renderStairImg(0)">stair</button>
-                <br>
-                <button @click="renderStairImg(1)">stair2</button>
-                <br>
-                <button @click="renderStairImg(2)">stair3</button>
-                <br>
-                <h2>roof</h2>
-                <button @click="renderRoofImg(0)">roof-single</button>
-                <br>
-                <button @click="renderRoofImg(1)">roof-standing</button>
-                <br>
-                <h2>door</h2>
-                <button @click="renderDoorImg(0)">door</button>
-                <br>
-                <button @click="renderDoorImg(1)">door2</button>
-                <br>
-                <h2>addon</h2>
-                <button @click="renderAddonImg(0)">addon</button>
-                <br>
-                {{ renderPrice }}
+            <!-- Option product -->
+            <div class="w-full col-span-6 lg:col-span-3 h-auto flex-grow max-h-screen overflow-auto">
+                <div class="p-5 flex flex-col justify-center items-center gap-2">
+                    <h1 class="text-4xl font-bold">Configure Your Abodu</h1>
+                    <div class="w-40 md:w-24 lg:w-20 bg-orange-900 text-center mx-auto mb-5" style="height: 1px"></div>
+                    <p class="text-gray-500 text-justify">Use our configurator to run through all the options, upgrades, colors and customizations to truly make it yours.</p>
+                </div>
+                <div class=" flex flex-col justify-center items-center gap-5 p-5">
+                <!-- Siding -->
+                <h2>Siding</h2>
+                <button @click="renderWallImg(0)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeWallIndex === 0 ? 'border-2 border-orange-900' : ''">
+                    <div>Lap Siding White</div>
+                    <div>${{ wall[0].price }}</div>
+                </button>
+                <button @click="renderWallImg(1)" 
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeWallIndex === 1 ? 'border-2 border-orange-900' : ''">
+                    <div>Lap Siding Black</div>
+                    <div>${{ wall[1].price }}</div>
+                </button>
+                <button @click="renderWallImg(2)" 
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeWallIndex === 2 ? 'border-2 border-orange-900' : ''">
+                    <div>Board & Batten White</div>
+                    <div>${{ wall[2].price }}</div>
+                </button>
+                <button @click="renderWallImg(3)" 
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeWallIndex === 3 ? 'border-2 border-orange-900' : ''">
+                    <div>Board & Batten Black</div>
+                    <div>${{ wall[3].price }}</div>
+                </button>
+                </div>
+                <!-- Stair -->
+                <div class="flex flex-col justify-center items-center gap-5 p-5">
+                    <h2>Stair</h2>
+                <button @click="renderStairImg(0)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeStairIndex === 0 ? 'border-2 border-orange-900' : ''">
+                    <div>stair</div>
+                    <div>${{ stair[0].price }}</div>
+                </button>
+                <button @click="renderStairImg(1)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeStairIndex === 1 ? 'border-2 border-orange-900' : ''">
+                    <div>stair2</div>
+                    <div>${{ stair[1].price }}</div>
+                </button>
+                <button @click="renderStairImg(2)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeStairIndex === 2 ? 'border-2 border-orange-900' : ''">
+                    <div>stair3</div>
+                    <div>${{ stair[2].price }}</div>
+                </button>
+                </div>
+                <!-- Roof -->
+                <div class="flex flex-col justify-center items-center gap-5 p-5">
+                    <h2>Roof</h2>
+                <button @click="renderRoofImg(0)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeRoofIndex === 0 ? 'border-2 border-orange-900' : ''">
+                    <div>roof-single</div>
+                    <div>${{ roof[0].price }}</div>
+                </button>
+                <button @click="renderRoofImg(1)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeRoofIndex === 1 ? 'border-2 border-orange-900' : ''">
+                    <div>roof-standing</div>
+                    <div>${{ roof[1].price }}</div>
+                </button>
+                <h2>Door</h2>
+                <button @click="renderDoorImg(0)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeDoorIndex === 0 ? 'border-2 border-orange-900' : ''">
+                    <div>door</div>
+                    <div>${{ door[0].price }}</div>
+                </button>
+                <button @click="renderDoorImg(1)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeDoorIndex === 1 ? 'border-2 border-orange-900' : ''">
+                    <div>door2</div>
+                    <div>${{ door[1].price }}</div>
+                </button>
+                </div>
+                <!-- Addon -->
+                <div class="flex flex-col justify-center items-center gap-5 p-5">
+                    <h2>Addon</h2>
+                <button @click="renderAddonImg(0)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeAddonIndex === 0 ? 'border-2 border-orange-900' : ''">
+                    <div>addon</div>
+                    <div>${{ addon[0].price }}</div>
+                </button>
+                </div>
+                <div class="flex flex-row w-full p-5 gap-5 justify-between items-center fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
+                    <div class="w-1/2 flex flex-start">Total Price: ${{ totalPrice }}</div>
+                    <div class="w-1/2 flex flex-end"><button class="btn">Continue -></button></div>
+                </div>
             </div>
         </div>
     </div>
@@ -74,7 +144,7 @@ const wall = [
 const stair = [
   { src: "cdn/aboduone/house/Stair/stair.png", price: 20000 },
   { src: "cdn/aboduone/house/Stair/stair2.png", price: 21000 },
-  { src: "cdn/aboduone/house/Stair/stair3.png", price: 27000, zindex:'z-40' },
+  { src: "cdn/aboduone/house/Stair/stair3.png", price: 27000, zIndex:'z-40' },
 ];
 const roof = [
     { src: "", price: 5700 },
@@ -82,12 +152,13 @@ const roof = [
 ]
 const door = [
     { src: "", price: 23000 },
-    { src: "cdn/aboduone/house/Door/door2.png", price: 25000, zindex:'z-30' }
+    { src: "cdn/aboduone/house/Door/door2.png", price: 25000, zIndex:'z-30' }
 ]
 const addon = [
     { src: "cdn/aboduone/house/add-on/add-on.png", price: 2000 }
 ]
-const renderPrice = ref([]);
+const renderType = ref([]);
+const totalPrice = ref(0);
 
 const currentSlide = ref(0);
 const renderWall = ref(null);
@@ -95,6 +166,12 @@ const renderStair = ref(null);
 const renderRoof = ref(null);
 const renderDoor = ref(null);
 const renderAddon = ref(null);
+
+const activeWallIndex = ref(null);
+const activeStairIndex = ref(null);
+const activeRoofIndex = ref(null);
+const activeDoorIndex = ref(null);
+const activeAddonIndex = ref(null);
 
 const reset = () => {
     renderRoof.value = null;
@@ -116,22 +193,27 @@ function prevSlide() {
 
 function renderWallImg(index) {
     renderWall.value = wall[index];
+    activeWallIndex.value = index;
 }
 
 function renderStairImg(index) {
   renderStair.value = stair[index];
+  activeStairIndex.value = index;
 }
 
 function renderRoofImg(index) {
     renderRoof.value = roof[index];
+    activeRoofIndex.value = index;
 }
 
 function renderDoorImg(index) {
     renderDoor.value = door[index];
+    activeDoorIndex.value = index;
 }
 
 function renderAddonImg(index) {
     renderAddon.value = addon[index];
+    activeAddonIndex.value = index;
 }
 
 function getRenderObjects() {
@@ -147,13 +229,14 @@ function getRenderObjects() {
 // Watch for changes in renderWall, renderStair, renderRoof, renderDoor, and renderAddon
 watch([renderWall, renderStair, renderRoof, renderDoor, renderAddon], () => {
     const renderObjects = getRenderObjects();
-    renderPrice.value = Object.values(renderObjects).filter(item => item !== null).map(item => item);
+    renderType.value = Object.values(renderObjects).filter(item => item !== null).map(item => item);
+    totalPrice.value = renderType.value.reduce((acc, item) => acc + item.price, 0);
 });
 </script>
 
 <style scoped>
 h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 </style>
