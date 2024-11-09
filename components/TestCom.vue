@@ -109,13 +109,13 @@
                 <div class="flex flex-col justify-center items-center gap-5 p-5">
                     <h2>Add-Ons</h2>
                 <button @click="renderAddonImg(0)"
-                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center pb-16 lg:pb-0 w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeAddonIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div class="flex items-center justify-center gap-1"><input type="checkbox" :checked="checkAddon" class="checkbox rounded-full" />Gutters</div>
                     <div>${{ addon[0].price }}</div>
                 </button>
                 </div>
-                <div class="flex w-full p-5 gap-5 justify-between items-center pb-16 lg:pb-0 fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
+                <div class="flex w-full p-5 gap-5 justify-between items-center fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
                     <div class="w-full text-start">Total Price: ${{ totalPrice }}</div>
                     <div class="w-full text-end"><button @click="reset()" class="btn">Reset Custom</button></div>
                 </div>
