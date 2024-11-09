@@ -115,9 +115,9 @@
                     <div>${{ addon[0].price }}</div>
                 </button>
                 </div>
-                <div class="flex flex-row w-full p-5 gap-5 justify-between items-center fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
-                    <div class="w-1/2 flex flex-start">Total Price: ${{ totalPrice }}</div>
-                    <div class="w-1/2 flex flex-end"><button class="btn">Continue -></button></div>
+                <div class="flex w-full p-5 gap-5 justify-between items-center fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
+                    <div class="w-full text-start">Total Price: ${{ totalPrice }}</div>
+                    <div class="w-full text-end"><button class="btn">Continue -></button></div>
                 </div>
             </div>
         </div>
@@ -142,8 +142,8 @@ const wall = [
     { src: "cdn/aboduone/house/wall/boad-black.png", price: 7800 }
 ];
 const stair = [
-  { src: "cdn/aboduone/house/Stair/stair.png", price: 20000 },
-  { src: "cdn/aboduone/house/Stair/stair2.png", price: 21000 },
+  { src: "cdn/aboduone/house/Stair/stair.png", price: 8000 },
+  { src: "cdn/aboduone/house/Stair/stair2.png", price: 10000 },
   { src: "cdn/aboduone/house/Stair/stair3.png", price: 27000, zIndex:'z-40' },
 ];
 const roof = [
@@ -151,7 +151,7 @@ const roof = [
     { src: "cdn/aboduone/house/roof/roof-standing.png", price: 6000 }
 ]
 const door = [
-    { src: "", price: 23000 },
+    { src: "", price: 20000 },
     { src: "cdn/aboduone/house/Door/door2.png", price: 25000, zIndex:'z-30' }
 ]
 const addon = [
@@ -225,6 +225,16 @@ function getRenderObjects() {
         addon: renderAddon.value
     };
 }
+onMounted(() => {
+    renderWall.value = { src: "cdn/aboduone/house/wall/lap-white.png", price: 7500 }
+    activeWallIndex.value = 0;
+    renderStair.value = { src: "cdn/aboduone/house/Stair/stair.png", price: 8000 }
+    activeStairIndex.value = 0;
+    renderRoof.value = { src: "", price: 5700 }
+    activeRoofIndex.value = 0;
+    renderDoor.value = { src: "", price: 20000 }
+    activeDoorIndex.value = 0;
+})
 
 // Watch for changes in renderWall, renderStair, renderRoof, renderDoor, and renderAddon
 watch([renderWall, renderStair, renderRoof, renderDoor, renderAddon], () => {
