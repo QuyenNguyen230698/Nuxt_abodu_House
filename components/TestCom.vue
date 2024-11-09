@@ -130,10 +130,10 @@ import { ref, watch } from 'vue';
 //#region QuyenNc( khởi tạo các mảng hình ảnh )
 const solution = [
   { src: "cdn/aboduone/abozu1.png" },
-  { src: "cdn/aboduone/abozu2.jpeg" },
-  { src: "cdn/aboduone/abozu3.jpeg" },
-  { src: "cdn/aboduone/abozu4.jpeg" },
-  { src: "cdn/aboduone/abozu5.png" },
+//   { src: "cdn/aboduone/abozu2.jpeg" },
+//   { src: "cdn/aboduone/abozu3.jpeg" },
+//   { src: "cdn/aboduone/abozu4.jpeg" },
+//   { src: "cdn/aboduone/abozu5.png" },
 ];
 
 const wall = [
@@ -158,6 +158,9 @@ const door = [
 const addon = [
     { src: "cdn/aboduone/house/add-on/add-on.png", price: 2000 }
 ]
+const obj = ref([
+    {key: 0, data: {renderWall:'{ src: "cdn/aboduone/house/wall/lap-white.png", price: 7500 }',activeWallIndex:0,}}
+])
 //#endregion
 
 //#region QuyenNc ( khởi tạo các biến dữ liệu )
@@ -209,7 +212,9 @@ function nextSlide() {
   currentSlide.value = (currentSlide.value + 1) % solution.length;
 }
 function prevSlide() {
-    resetSlide()
+    renderWall.value = obj.value[0].data.renderWall
+    activeWallIndex.value = obj.value[0].data.activeWallIndex
+    // resetSlide()
   currentSlide.value = (currentSlide.value - 1 + solution.length) % solution.length;
 }
 //#endregion
