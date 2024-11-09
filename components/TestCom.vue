@@ -4,11 +4,11 @@
             <!-- render Imgage Product -->
             <div class="w-full col-span-6 lg:col-span-9 h-full lg:h-full flex justify-center items-center">
                 <div class="carousel w-full relative order-1 lg:order-2 h-full">
-                    <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item w-full transition-transform duration-700" 
+                    <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item w-full max-h-screen" 
                     :style="{ transform: `translateX(-${currentSlide * 100}%)` }" >
-                    <NuxtImg :src="slide.src" loading="lazy" class="w-full h-full object-cover" />
+                    <NuxtImg :src="slide.src" loading="lazy" class="w-full h-full object-cover object-center" />
                     <div v-for="item in renderType" :key="item.src" class="absolute inset-0 flex items-center justify-center">
-                        <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover"/>
+                        <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
                     </div>
                     </div>
                     <div class="absolute inset-y-1/2 left-5 flex items-center">
@@ -22,9 +22,9 @@
             <!-- Option product -->
             <div class="w-full col-span-6 lg:col-span-3 h-auto flex-grow max-h-screen overflow-auto">
                 <div class="p-5 flex flex-col justify-center items-center gap-2">
-                    <h1 class="text-4xl font-bold">Configure Your Abodu</h1>
+                    <h1 class="text-3xl font-bold">Configure Your Abodu</h1>
                     <div class="w-40 md:w-24 lg:w-20 bg-orange-900 text-center mx-auto mb-5" style="height: 1px"></div>
-                    <p class="text-gray-500 text-justify">Use our configurator to run through all the options, upgrades, colors and customizations to truly make it yours.</p>
+                    <p class="text-gray-500 text-sm text-justify">Use our configurator to run through all the options, upgrades, colors and customizations to truly make it yours.</p>
                 </div>
                 <div class=" flex flex-col justify-center items-center gap-5 p-5">
                 <!-- Siding -->
