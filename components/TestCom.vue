@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div v-show="!isLoading" class="flex flex-col lg:flex-row w-full h-full max-h-screen overflow-hidden relative">
+        <div v-show="!isLoading" class="grid grid-cols-12 w-full h-full max-h-screen overflow-hidden relative">
             <!-- render Imgage Product -->
-            <div  class="w-full lg:w-2/3 h-full flex justify-center items-center">
+            <div class="col-span-12 lg:col-span-9 h-full flex justify-center items-center">
                 <div class="carousel w-full relative order-1 lg:order-2 h-full overflow-hidden">
-                    <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item duration-500 ease-in-out translate-all w-full max-h-screen overflow-hidden" 
+                    <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item duration-500 ease-in-out translate-all w-full lg:max-h-screen overflow-hidden" 
                     :style="{ transform: `translateX(-${currentSlide * 100}%)` }" >
                     <NuxtImg :src="slide.src" loading="eager" class="w-full h-full object-cover object-center" />
                     <div v-for="(item, index) in renderType" :key="index" class="absolute inset-0 flex items-center justify-center" 
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <!-- Option product -->
-            <div class="w-full lg:w-1/3 h-full flex-grow lg:max-h-screen overflow-y-auto pb-12 lg:pb-0">
+            <div class="col-span-12 lg:col-span-3 h-auto max-h-screen overflow-y-auto pb-12 lg:pb-0 lg:max-h-screen lg:overflow-y-auto">
                 <div class="pt-2 flex flex-col justify-center items-center gap-1">
                     <h1 class="text-3xl font-bold">Configure Your House</h1>
                     <div class="w-40 md:w-24 lg:w-20 bg-orange-900 text-center mx-auto mb-2" style="height: 1px"></div>
@@ -37,25 +37,25 @@
                 <!-- Siding -->
                 <h2>Siding</h2>
                 <button @click="renderWallImg(0)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeWallIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div>Lap Siding White</div>
                     <div>${{ wall[0].price }}</div>
                 </button>
                 <button @click="renderWallImg(1)" 
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeWallIndex === 1 ? 'border-2 border-orange-900' : ''">
                     <div>Lap Siding Black</div>
                     <div>${{ wall[1].price }}</div>
                 </button>
                 <button @click="renderWallImg(2)" 
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeWallIndex === 2 ? 'border-2 border-orange-900' : ''">
                     <div>Board & Batten White</div>
                     <div>${{ wall[2].price }}</div>
                 </button>
                 <button @click="renderWallImg(3)" 
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeWallIndex === 3 ? 'border-2 border-orange-900' : ''">
                     <div>Board & Batten Black</div>
                     <div>${{ wall[3].price }}</div>
@@ -65,19 +65,19 @@
                 <div class=" flex flex-col justify-center items-center gap-2 p-2">
                     <h2>Stair</h2>
                 <button @click="renderStairImg(0)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeStairIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div>Stair Default</div>
                     <div>${{ stair[0].price }}</div>
                 </button>
                 <button @click="renderStairImg(1)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeStairIndex === 1 ? 'border-2 border-orange-900' : ''">
                     <div>Stair 4x10</div>
                     <div>${{ stair[1].price }}</div>
                 </button>
                 <button @click="renderStairImg(2)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeStairIndex === 2 ? 'border-2 border-orange-900' : ''">
                     <div>Ramp</div>
                     <div>${{ stair[2].price }}</div>
@@ -87,13 +87,13 @@
                 <div class=" flex flex-col justify-center items-center gap-2 p-2">
                     <h2>Roof</h2>
                 <button @click="renderRoofImg(0)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeRoofIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div>Composite Shingle</div>
                     <div>${{ roof[0].price }}</div>
                 </button>
                 <button @click="renderRoofImg(1)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeRoofIndex === 1 ? 'border-2 border-orange-900' : ''">
                     <div>Standing Seam Metal</div>
                     <div>${{ roof[1].price }}</div>
@@ -102,13 +102,13 @@
                 <div class=" flex flex-col justify-center items-center gap-2 p-2">
                     <h2>Door</h2>
                 <button @click="renderDoorImg(0)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeDoorIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div>Glass Entry Door</div>
                     <div>${{ door[0].price }}</div>
                 </button>
                 <button @click="renderDoorImg(1)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeDoorIndex === 1 ? 'border-2 border-orange-900' : ''">
                     <div>Folding Door</div>
                     <div>${{ door[1].price }}</div>
@@ -118,7 +118,7 @@
                 <div class=" flex flex-col justify-center items-center gap-2 p-2">
                     <h2>Add-Ons</h2>
                 <button @click="renderAddonImg(0)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeAddonIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div class="flex items-center justify-center gap-1"><input type="checkbox" :checked="checkAddon" class="checkbox rounded-full" />Gutters</div>
                     <div>${{ addon[0].price }}</div>
@@ -131,13 +131,13 @@
                 <div class=" flex flex-col justify-center items-center gap-2 p-2">
                     <h2>Floor</h2>
                 <button @click="renderFloorImg(0)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeFloorIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div>Light Oak</div>
                     <div>${{ floor[0].price }}</div>
                 </button>
                 <button @click="renderFloorImg(1)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeFloorIndex === 1 ? 'border-2 border-orange-900' : ''">
                     <div>Dark Oak</div>
                     <div>${{ floor[1].price }}</div>
@@ -146,20 +146,20 @@
                 <div class=" flex flex-col justify-center items-center gap-2 p-2">
                     <h2>Sofa</h2>
                     <button @click="renderSofaImg(2)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeSofaIndex === 2 ? 'border-2 border-orange-900' : ''">
                     <div>Sofa Default</div>
                     <div>${{ sofa[2].price }}</div>
                 </button>
                 <button @click="renderSofaImg(0)"
-                class="flex flex-row justify-between items-center w-full h-12 px-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                class="flex flex-row justify-between items-center w-full h-12 px-5 lg:h-16 lg:p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeSofaIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div>Storage Bench & Cushion</div>
                     <div>${{ sofa[0].price }}</div>
                 </button>
                 </div>
 
-                <div class="flex w-full px-5 py-1 justify-between items-center fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
+                <div class="flex w-full px-5 py-1 lg:h-16 lg:p-5 justify-between items-center fixed lg:sticky bottom-0 bg-white shadow-lg border-t border-gray-400">
                     <div class="w-full text-start">Total Price: ${{ totalPrice }}</div>
                     <div class="w-full text-end"><button @click="reset()" class="btn">Reset Custom</button></div>
                 </div>
