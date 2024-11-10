@@ -3,8 +3,8 @@
         <div v-show="!isLoading" class="flex flex-col lg:flex-row w-full h-full max-h-screen overflow-hidden relative">
             <!-- render Imgage Product -->
             <div  class="w-full lg:w-2/3 h-full flex justify-center items-center">
-                <div class="carousel w-full relative order-1 lg:order-2 h-full">
-                    <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item duration-500 ease-in-out translate-all w-full max-h-screen" 
+                <div class="carousel w-full relative order-1 lg:order-2 h-full overflow-hidden">
+                    <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item duration-500 ease-in-out translate-all w-full max-h-screen overflow-hidden" 
                     :style="{ transform: `translateX(-${currentSlide * 100}%)` }" >
                     <NuxtImg :src="slide.src" loading="eager" class="w-full h-full object-cover object-center" />
                     <div v-for="(item, index) in renderType" :key="index" class="absolute inset-0 flex items-center justify-center" 
@@ -166,8 +166,9 @@
                 </div>
             </div>
         </div>
-        <div v-show="isLoading" class="w-full h-full flex justify-center items-center bg-black absolute inset-0" >
-                <progress class="progress progress-info w-56" style="height: 3px !important"></progress>
+        <div v-show="isLoading" class="w-full h-full flex flex-col justify-center items-center bg-black absolute inset-0 gap-4" >
+            <NuxtImg src="/image/icon-green.svg" loading="eager" class="w-16 h-16 bg-transparent"/>
+                <progress class="progress progress-success w-56" style="height: 3px !important"></progress>
             </div>
     </div>
 </template>
