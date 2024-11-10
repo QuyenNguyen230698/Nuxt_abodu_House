@@ -1,6 +1,8 @@
 <template>
     <div>
-        <TestCom />
+        <ClientOnly>
+            <TestCom />
+        </ClientOnly>
     </div>
 </template>
 
