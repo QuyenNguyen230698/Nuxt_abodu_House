@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
+    '@pinia/nuxt'
   ],
   css: ['@/assets/css/main.css',],
   devServer: {
@@ -32,7 +33,13 @@ export default defineNuxtConfig({
       }
     }
   },
-
+  imports: {
+    dirs: ["store"],
+    autoImport: true,
+  },
+  build: {
+    transpile: ['pinia-plugin-persistedstate'],
+  },
   nitro: {
     serveStatic: true,
     prerender: {},
