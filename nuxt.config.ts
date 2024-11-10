@@ -1,7 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { compression } from "vite-plugin-compression2";
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  ssr:true,
+  compatibilityDate: '2024-11-10',
   devtools: { enabled: false },
   modules: [
     '@nuxt/image',
