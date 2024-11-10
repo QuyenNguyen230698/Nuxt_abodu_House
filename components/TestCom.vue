@@ -368,7 +368,10 @@ onMounted(() => {
     activeFloorIndex.value = 0;
     renderSofa.value = { src: "cdn/aboduone/livingroom/sofa/sofa1.png", price: 1900 };
     activeSofaIndex.value = 2;
-    isLoading.value = false;
+
+    setTimeout(() => {
+        isLoading.value = false;
+    }, 1200);
 })
 
 // Theo dõi sự thay đổi của renderWall, renderStair, renderRoof, renderDoor, và renderAddon
