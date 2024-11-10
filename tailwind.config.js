@@ -23,6 +23,15 @@ module.exports = {
       playfair: ["Playfair Display", "serif"],
     },
     extend: {
+      padding: {
+        '29R': '29rem',
+        '30R': '30rem',
+        '33R': '33rem',
+        '35R': '35rem',
+        '40R': '40rem',
+        '60R': '60rem',
+        '80R': '80rem',
+      },
       scale: {
         105: "1.05",
         98: "0.98",
