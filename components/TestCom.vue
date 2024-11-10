@@ -49,6 +49,7 @@
 
                     <!-- Options container -->
                     <div class="flex flex-col justify-center items-center gap-2 p-2 w-full">
+                        
                         <!-- Siding -->
                         <h2>Siding</h2>
                         <button @click="renderWallImg(0)"
