@@ -43,6 +43,7 @@
   h1, h2, h3{
     font-weight: 500 !important;
     font-family: 'SFUFuturaBook', sans-serif;
+    @apply text-lg md:text-xl lg:text-2xl
   }
   h4, h5, h6, p, small{
     font-weight: 100 !important;
@@ -53,7 +54,7 @@
     font-family: 'SFUFuturaBook', sans-serif;
   }
   p{
-    @apply text-xs sm:text-sm md:text-base
+    @apply text-xs sm:text-sm 
   }
   span { @apply text-sm; }
   small { @apply text-xs text-gray-500; }
