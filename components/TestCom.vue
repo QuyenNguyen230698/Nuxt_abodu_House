@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!isLoading" class="flex flex-col lg:flex-row w-full h-full max-h-screen overflow-hidden relative">
+        <div v-show="!isLoading" class="flex flex-col lg:flex-row w-full h-full max-h-screen overflow-hidden relative">
             <!-- render Imgage Product -->
             <div  class="w-full lg:w-2/3 h-full flex justify-center items-center">
                 <div class="carousel w-full relative order-1 lg:order-2 h-full">
@@ -11,9 +11,12 @@
                          :class="currentSlide === 0 ? 'block' : 'hidden'">
                         <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
                     </div>
-                    <div v-for="(item, index) in renderLivingroom" :key="index" class="absolute inset-0 flex items-center justify-center" 
+                    <div v-for="(item, index) in renderLivingroom" :key="index" class="absolute inset-0 flex items-center justify-center z-10" 
                          :class="currentSlide === 1 ? 'block' : 'hidden'">
                         <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
+                    </div>
+                    <div v-if="renderLivingroom?.length > 0 && currentSlide === 1 && table" class="absolute inset-0 flex items-center justify-center" >
+                        <NuxtImg :src="table.src" loading="lazy" class="w-full h-full object-cover object-center"/>
                     </div>
                     </div>
                     <div class="absolute inset-y-1/2 left-5 flex items-center">
@@ -143,23 +146,17 @@
                 </div>
                 <div class="flex flex-col justify-center items-center gap-5 p-5">
                     <h2>Sofa</h2>
+                    <button @click="renderSofaImg(2)"
+                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
+                :class="activeSofaIndex === 2 ? 'border-2 border-orange-900' : ''">
+                    <div>Sofa Default</div>
+                    <div>${{ sofa[2].price }}</div>
+                </button>
                 <button @click="renderSofaImg(0)"
                 class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
                 :class="activeSofaIndex === 0 ? 'border-2 border-orange-900' : ''">
                     <div>Storage Bench & Cushion</div>
                     <div>${{ sofa[0].price }}</div>
-                </button>
-                <button @click="renderSofaImg(1)"
-                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
-                :class="activeSofaIndex === 1 ? 'border-2 border-orange-900' : ''">
-                    <div>Storage Bench & Cushion</div>
-                    <div>${{ sofa[1].price }}</div>
-                </button>
-                <button @click="renderSofaImg(2)"
-                class="flex flex-row justify-between items-center w-full h-20 p-5 border border-gray-400 rounded-3xl hover:border-2 hover:border-orange-900"
-                :class="activeSofaIndex === 2 ? 'border-2 border-orange-900' : ''">
-                    <div>Sofa Default</div>
-                    <div>${{ sofa[2].price }}</div>
                 </button>
                 </div>
 
@@ -169,7 +166,7 @@
                 </div>
             </div>
         </div>
-        <div v-else class="w-full h-full flex justify-center items-center bg-black absolute inset-0" >
+        <div v-show="isLoading" class="w-full h-full flex justify-center items-center bg-black absolute inset-0" >
                 <progress class="progress progress-info w-56" style="height: 3px !important"></progress>
             </div>
     </div>
@@ -216,7 +213,7 @@ const floor = [
     { src: "cdn/aboduone/livingroom/floor/foor2.png", price: 1000 }
 ]
 const sofa = [
-    { src: "cdn/aboduone/livingroom/sofa/50year.png", price: 1900 },
+    { src: "cdn/aboduone/livingroom/sofa/50year.png", price: 3800, zIndex:'z-10'},
     { src: "cdn/aboduone/livingroom/sofa/50year2.png", price: 1900 },
     { src: "cdn/aboduone/livingroom/sofa/sofa1.png", price: 1900 }
 ]
@@ -225,6 +222,7 @@ const sofa = [
 //#region QuyenNc ( khởi tạo các biến dữ liệu )
 const renderType = ref([]);
 const renderLivingroom = ref([]);
+const table = ref(null);
 const totalPrice = ref(0);
 const checkAddon = ref(false);
 const isLoading = ref(true);
@@ -331,6 +329,7 @@ function renderFloorImg(index) {
 function renderSofaImg(index) {
     renderSofa.value = sofa[index];
     activeSofaIndex.value = index;
+    table.value = { src: "cdn/aboduone/livingroom/sofa/50year2.png", price: 1900 }
 }
 
 function getRenderObjects() {
