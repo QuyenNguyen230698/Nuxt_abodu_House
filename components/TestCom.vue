@@ -1,6 +1,5 @@
 <template>
     <div>
-        <PiniaTest />
         <div v-if="!isLoading" class="flex flex-col lg:flex-row w-full h-full max-h-screen overflow-hidden relative">
             <!-- render Imgage Product -->
             <div  class="w-full lg:w-2/3 h-full flex justify-center items-center">
@@ -8,14 +7,14 @@
                     <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item duration-500 ease-in-out translate-all w-full max-h-screen" 
                     :style="{ transform: `translateX(-${currentSlide * 100}%)` }" >
                     <NuxtImg :src="slide.src" loading="lazy" class="w-full h-full object-cover object-center" />
-                    <div v-for="item in renderType" :key="item.src" class="absolute inset-0 flex items-center justify-center" 
+                    <div v-for="(item, index) in renderType" :key="index" class="absolute inset-0 flex items-center justify-center" 
                          :class="currentSlide === 0 ? 'block' : 'hidden'">
                         <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
                     </div>
                     <div v-for="(item, index) in renderLivingroom" :key="index" class="absolute inset-0 flex items-center justify-center" 
-       :class="currentSlide === 1 ? 'block' : 'hidden'">
-    <NuxtImg v-if="item.src" :src="item.src" loading="lazy" class="w-full h-full object-cover object-center" />
-  </div>
+                         :class="currentSlide === 1 ? 'block' : 'hidden'">
+                        <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
+                    </div>
                     </div>
                     <div class="absolute inset-y-1/2 left-5 flex items-center">
                     <button @click="prevSlide" class="btn btn-circle bg-transparent border-none text-white text-2xl hover:bg-transparent">❮</button>
@@ -271,6 +270,12 @@ const reset = () => {
 function nextSlide() {
     isLoading.value = true;
   currentSlide.value = (currentSlide.value + 1) % solution.length;
+  if (currentSlide.value === 0) {
+    renderType.value.push(positionStore.arrayHouse)
+  }
+  if (currentSlide.value === 1) {
+    renderLivingroom.value.push(positionStore.arrayLivingroom)
+ }
   setTimeout(() => {
     isLoading.value = false;
   }, 1000);
@@ -278,6 +283,12 @@ function nextSlide() {
 function prevSlide() {
     isLoading.value = true;
   currentSlide.value = (currentSlide.value - 1 + solution.length) % solution.length;
+  if (currentSlide.value === 0) {
+    renderType.value.push(positionStore.arrayHouse)
+  }
+  if (currentSlide.value === 1) {
+    renderLivingroom.value.push(positionStore.arrayLivingroom)
+ }
   setTimeout(() => {
     isLoading.value = false;
   }, 1000);
@@ -355,8 +366,9 @@ onMounted(() => {
     checkAddon.value = false;
 
     renderFloor.value = { src: "", price: 1000 };
+    activeFloorIndex.value = 0;
     renderSofa.value = { src: "cdn/aboduone/livingroom/sofa/sofa1.png", price: 1900 };
-
+    activeSofaIndex.value = 2;
     isLoading.value = false;
 })
 
@@ -364,7 +376,8 @@ onMounted(() => {
 watch([renderWall, renderStair, renderRoof, renderDoor, renderAddon], () => {
     const renderObjects = getRenderObjects();
     renderType.value = Object.values(renderObjects).filter(item => item !== null).map(item => item);
-    totalPrice.value = renderType.value.reduce((acc, item) => acc + item.price, 0);
+    totalPrice.value = renderType.value.reduce((acc, item) => acc + item.price, 0) + 
+                       renderLivingroom.value.reduce((acc, item) => acc + item.price, 0);
     positionStore.setArrayHouse(renderType.value)
 });
 
