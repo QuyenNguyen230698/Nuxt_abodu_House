@@ -6,17 +6,17 @@
                 <div class="carousel w-full relative order-1 lg:order-2 h-full">
                     <div v-for="(slide, index) in solution" :key="index" class="relative carousel-item duration-500 ease-in-out translate-all w-full max-h-screen" 
                     :style="{ transform: `translateX(-${currentSlide * 100}%)` }" >
-                    <NuxtImg :src="slide.src" loading="lazy" class="w-full h-full object-cover object-center" />
+                    <NuxtImg :src="slide.src" loading="eager" class="w-full h-full object-cover object-center" />
                     <div v-for="(item, index) in renderType" :key="index" class="absolute inset-0 flex items-center justify-center" 
                          :class="currentSlide === 0 ? 'block' : 'hidden'">
-                        <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
+                        <NuxtImg v-if="item.src" :src="item.src" loading="eager" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
                     </div>
                     <div v-for="(item, index) in renderLivingroom" :key="index" class="absolute inset-0 flex items-center justify-center z-10" 
                          :class="currentSlide === 1 ? 'block' : 'hidden'">
-                        <NuxtImg v-if="item.src" :src="item.src" loading="lazy" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
+                        <NuxtImg v-if="item.src" :src="item.src" loading="eager" :class="[item.zIndex]" class="w-full h-full object-cover object-center"/>
                     </div>
                     <div v-if="renderLivingroom?.length > 0 && currentSlide === 1 && table" class="absolute inset-0 flex items-center justify-center" >
-                        <NuxtImg :src="table.src" loading="lazy" class="w-full h-full object-cover object-center"/>
+                        <NuxtImg :src="table.src" loading="eager" class="w-full h-full object-cover object-center"/>
                     </div>
                     </div>
                     <div class="absolute inset-y-1/2 left-5 flex items-center">
