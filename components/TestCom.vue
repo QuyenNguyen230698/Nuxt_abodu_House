@@ -376,7 +376,11 @@ function renderFloorImg(index) {
 function renderSofaImg(index) {
     renderSofa.value = sofa[index];
     activeSofaIndex.value = index;
-    table.value = { src: "cdn/aboduone/livingroom/sofa/50year2.png", price: 1900 }
+    if (index === 0) {
+        table.value = { src: "cdn/aboduone/livingroom/sofa/50year2.png", price: 1900 }
+    } else {
+        table.value = null;
+    }
 }
 
 function getRenderObjects() {
